@@ -13,19 +13,18 @@ sampling_rate = 16000
 zero_padding_time = 0.1
 
 
-os.makedirs(os.path.dirname(concatenated_time_data_csv_path), exist_ok=True)
-with open(concatenated_time_data_csv_path, 'w') as f:
-    f.write("file_name,start,end\n")
-
-
 wav_file_list = sorted(list(map(lambda path: os.path.normpath(os.path.abspath(path)) , glob.glob(wav_file_for_concat_path + '/**/*.wav', recursive=True))))
 
 
 zero_padding_sample = np.zeros(int(zero_padding_time*sampling_rate))
 
+
 concat_list = [zero_padding_sample]
 start_sample_index = len(zero_padding_sample)
-with open (concatenated_time_data_csv_path, 'a') as f:
+
+os.makedirs(os.path.dirname(concatenated_time_data_csv_path), exist_ok=True)
+with open(concatenated_time_data_csv_path, 'w') as f:
+    f.write("file_name,start,end\n")
     for wav_path in wav_file_list:
         x, sr = librosa.load(wav_path, sr=None)
         if sr != sampling_rate:
