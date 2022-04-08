@@ -41,7 +41,6 @@ with open(concatenated_time_data_csv_path, 'w') as f:
 
         start_sample_index = end_sample_index + len(zero_padding_sample)
 
-concat_list.append(zero_padding_sample)
 concatenated_wav_data = np.concatenate(concat_list)
 
 os.makedirs(os.path.dirname(concatenated_wav_path), exist_ok=True)
